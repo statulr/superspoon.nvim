@@ -1,2 +1,2 @@
 # super-spoon.nvim
-superspoon.nvim - the fast and extensible statusline for MoaiVim
+super-spoon.nvim - the fast and extensible statusline for MoaiVim
