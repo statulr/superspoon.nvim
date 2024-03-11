@@ -43,7 +43,7 @@ Statusline.activate = function()
 end
 
 M.setup = function()
-	local spoon = vim.api.nvim_create_augoup("spoon", {
+	local spoon = vim.api.nvim_create_augroup("spoon", {
 		clear = true
 	})
 
