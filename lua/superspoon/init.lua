@@ -6,10 +6,12 @@ Statusline = {}
 
 Statusline.active = function()
 	return table.concat({
+		"%#Statusline#",
+		Util.file_info(),
 		Util.lsp(),
 		"%#Statusline#",
 		"%=%#StatusLineExtra#",
-		Util.lineinfo(),
+		Util.line_info(),
 	})
 end
 
