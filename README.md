@@ -8,7 +8,7 @@ superspoon.nvim - a fast and extensible statusline
     'qtkittyy/superspoon.nvim',
 }
 ```
-### [packer](https://github.com/wbthomason/packer.nvim)
+### [packer.nvim](https://github.com/wbthomason/packer.nvim)
 ```lua
 use { 'qtkittyy/superspoon.nvim' }
 ```
@@ -31,3 +31,12 @@ EOF
 ```
 
 For more information, check out `:help lua-heredoc`.
+
+**Note:** Superspoon can alternativly be loaded via [lazy.nvim](https://github.com/folke/lazy.nvim) like this:
+```lua
+{
+    'qtkittyy/superspoon.nvim',
+    opts = {},
+}
+
+```
