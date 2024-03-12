@@ -38,5 +38,4 @@ For more information, check out [`:help lua-heredoc`](https://neovim.io/doc/user
     'qtkittyy/superspoon.nvim',
     opts = {},
 }
-
 ```
