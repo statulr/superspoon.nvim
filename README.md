@@ -28,4 +28,4 @@ lua << EOF
 require("superspoon").setup()
 EOF
 ```
-For more information, check out :help lua-heredoc.
+For more information, check out `:help lua-heredoc.`
