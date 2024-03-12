@@ -18,7 +18,7 @@ Plug 'qtkittyy/superspoon.nvim'
 ```
 
 ### Loading superspooon.nvim
-To load superspoon in lua use the following code snippet:
+To load superspoon use the following code snippet:
 ```lua
 require("superspoon").setup()
 ```
