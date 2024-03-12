@@ -10,10 +10,10 @@ end
 M.lsp = function()
 	local set_hl = vim.api.nvim_set_hl
 
-	set_hl(0, "SpoonDiagnosticError", { fg = "#ff5555", default = true })
-	set_hl(0, "SpoonDiagnosticWarn",  { fg = "#ffff55", default = true })
-	set_hl(0, "SpoonDiagnosticInfo",  { fg = "#55afff", default = true })
-	set_hl(0, "SpoonDiagnosticHint",  { fg = "#55ffaf", default = true })
+	set_hl(0, "SpoonDiagnosticError", { fg = "#F94B4B", bg = "#282433", default = true })
+	set_hl(0, "SpoonDiagnosticWarn",  { fg = "#CDE24E", bg = "#282433", default = true })
+	set_hl(0, "SpoonDiagnosticInfo",  { fg = "#5CA2DF", bg = "#282433", default = true })
+	set_hl(0, "SpoonDiagnosticHint",  { fg = "#60CCC9", bg = "#282433", default = true })
 
 	local count = {}
 	local dtype = {
@@ -33,16 +33,16 @@ M.lsp = function()
 	local info = ""
 
 	if count["errors"] ~= 0 then
-		errors = " %#SpoonDiagnosticError# " .. count["errors"]
+		errors = "%#SpoonDiagnosticError#  " .. count["errors"] .. "%#SpoonDiagnosticError# "
 	end
 	if count["warnings"] ~= 0 then
-		warnings = " %#SpoonDiagnosticWarn# " .. count["warnings"]
+		warnings = "%#SpoonDiagnosticWarn# " .. count["warnings"] .. "%#SpoonDiagnosticWarn# "
 	end
 	if count["hints"] ~= 0 then
-		hints = " %#SpoonDiagnosticHint# " .. count["hints"]
+		hints = "%#SpoonDiagnosticHint# " .. count["hints"] .. "%#SpoonDiagnosticHint# "
 	end
 	if count["info"] ~= 0 then
-		info = " %#SpoonDiagnosticInfo# " .. count["info"]
+		info = "%#SpoonDiagnosticInfo# " .. count["info"] .. "%#SpoonDiagnosticInfo# "
 	end
 
 	return errors .. warnings .. hints .. info .. "%#Normal#"
