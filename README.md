@@ -23,7 +23,7 @@ To load superspoon use the following code snippet:
 require("superspoon").setup()
 ```
 
-The plugin can similarly be loaded in a `.vim` file by wrapping it in lua heredoc like this:
+The plugin can similarly be loaded through a `.vim` file by wrapping it in lua heredoc like this:
 ```vim
 lua << EOF
 require("superspoon").setup()
