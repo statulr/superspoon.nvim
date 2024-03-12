@@ -1,6 +1,20 @@
 local M = {}
 
-M.lspsign = function()
+M.lineinfo = function()
+  if vim.bo.filetype == "alpha" then
+    return ""
+  end
+  return " %l:%c [%P] "
+end
+
+M.lsp = function()
+	local set_hl = vim.api.nvim_set_hl
+
+	set_hl(0, "SpoonDiagnosticError", { fg = "#ff5555", default = true })
+	set_hl(0, "SpoonDiagnosticWarn",  { fg = "#ffff55", default = true })
+	set_hl(0, "SpoonDiagnosticInfo",  { fg = "#55afff", default = true })
+	set_hl(0, "SpoonDiagnosticHint",  { fg = "#55ffaf", default = true })
+
 	local count = {}
 	local dtype = {
 		errors = "Error",
@@ -19,16 +33,16 @@ M.lspsign = function()
 	local info = ""
 
 	if count["errors"] ~= 0 then
-		errors = " %#LspDiagnosticsError# " .. count["errors"]
+		errors = " %#SpoonDiagnosticError# " .. count["errors"]
 	end
 	if count["warnings"] ~= 0 then
-		warnings = " %#LspDiagnosticsWarning# " .. count["warnings"]
+		warnings = " %#SpoonDiagnosticWarn# " .. count["warnings"]
 	end
 	if count["hints"] ~= 0 then
-		hints = " %#LspDiagnosticsHint# " .. count["hints"]
+		hints = " %#SpoonDiagnosticHint# " .. count["hints"]
 	end
 	if count["info"] ~= 0 then
-		info = " %#LspDiagnosticsInformation# " .. count["info"]
+		info = " %#SpoonDiagnosticInfo# " .. count["info"]
 	end
 
 	return errors .. warnings .. hints .. info .. "%#Normal#"
