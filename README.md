@@ -30,7 +30,7 @@ require("superspoon").setup()
 EOF
 ```
 
-For more information, check out `:help lua-heredoc`.
+For more information, check out [`:help lua-heredoc`](https://neovim.io/doc/user/lua.html#%3Alua-heredoc).
 
 **Note:** Superspoon can alternativly be loaded via [lazy.nvim](https://github.com/folke/lazy.nvim) like this:
 ```lua
