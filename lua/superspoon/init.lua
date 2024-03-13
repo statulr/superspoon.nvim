@@ -8,9 +8,9 @@ Statusline.active = function()
 	return table.concat({
 		"%#Statusline#",
 		Util.file_info(),
+		"%m%r ",
 		Util.lsp(),
-		"%#Statusline#",
-		"%=%#StatusLineExtra#",
+		"%#Statusline#%=",
 		Util.line_info(),
 	})
 end
@@ -20,6 +20,8 @@ Statusline.inactive = function()
 end
 
 M.setup = function()
+	vim.opt.cmdheight = 0
+
 	local spoon = vim.api.nvim_create_augroup("spoon", {
 		clear = true,
 	})

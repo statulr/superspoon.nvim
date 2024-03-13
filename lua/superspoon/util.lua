@@ -1,13 +1,14 @@
 local M = {}
 
 M.file_info = function()
-	return " %f "
+	return " %t "
 end
 
 M.line_info = function()
 	if vim.bo.filetype == "alpha" then
 		return ""
 	end
+
 	return " %l:%c [%P] "
 end
 
@@ -37,19 +38,41 @@ M.lsp = function()
 	local info = ""
 
 	if count["errors"] ~= 0 then
-		errors = "%#SpoonDiagnosticError#  " .. count["errors"] .. "%#SpoonDiagnosticError# "
+		errors = table.concat({
+			"%#SpoonDiagnosticError#  ",
+			count["errors"],
+			"%#SpoonDiagnosticError# ",
+		})
 	end
 	if count["warnings"] ~= 0 then
-		warnings = "%#SpoonDiagnosticWarn#  " .. count["warnings"] .. "%#SpoonDiagnosticWarn# "
+		warnings = table.concat({
+			"%#SpoonDiagnosticWarn#  ",
+			count["warnings"],
+			"%#SpoonDiagnosticWarn# ",
+		})
 	end
 	if count["hints"] ~= 0 then
-		hints = "%#SpoonDiagnosticHint#  " .. count["hints"] .. "%#SpoonDiagnosticHint# "
+		hints = table.concat({
+			"%#SpoonDiagnosticHint#  ",
+			count["hints"],
+			"%#SpoonDiagnosticHint# ",
+		})
 	end
 	if count["info"] ~= 0 then
-		info = "%#SpoonDiagnosticInfo#  " .. count["info"] .. "%#SpoonDiagnosticInfo# "
+		info = table.concat({
+			"%#SpoonDiagnosticInfo#  ",
+			count["info"],
+			"%#SpoonDiagnosticInfo# ",
+		})
 	end
 
-	return errors .. warnings .. hints .. info .. "%#Normal#"
+	return table.concat({
+		errors,
+		warnings,
+		hints,
+		info,
+		"%#Normal#",
+	})
 end
 
 return M
