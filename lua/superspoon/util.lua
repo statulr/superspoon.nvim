@@ -1,5 +1,34 @@
 local M = {}
 
+M.mode = function()
+	local modes = {
+		["n"] = "NORMAL",
+		["no"] = "NORMAL",
+		["v"] = "VISUAL",
+		["V"] = "VISUAL LINE",
+		[""] = "VISUAL BLOCK",
+		["s"] = "SELECT",
+		["S"] = "SELECT LINE",
+		[""] = "SELECT BLOCK",
+		["i"] = "INSERT",
+		["ic"] = "INSERT",
+		["R"] = "REPLACE",
+		["Rv"] = "VISUAL REPLACE",
+		["c"] = "COMMAND",
+		["cv"] = "VIM EX",
+		["ce"] = "EX",
+		["r"] = "PROMPT",
+		["rm"] = "MOAR",
+		["r?"] = "CONFIRM",
+		["!"] = "SHELL",
+		["t"] = "TERMINAL",
+	}
+
+	local current_mode = vim.api.nvim_get_mode().mode
+
+	return table.concat({ " %s ", modes[current_mode]}):upper()
+end
+
 M.file_info = function()
 	return " %t "
 end
@@ -38,32 +67,16 @@ M.lsp = function()
 	local info = ""
 
 	if count["errors"] ~= 0 then
-		errors = table.concat({
-			"%#SpoonDiagnosticError#  ",
-			count["errors"],
-			"%#SpoonDiagnosticError# ",
-		})
+		errors = table.concat({ "%#SpoonDiagnosticError#  ", count["errors"], "%#SpoonDiagnosticError# " })
 	end
 	if count["warnings"] ~= 0 then
-		warnings = table.concat({
-			"%#SpoonDiagnosticWarn#  ",
-			count["warnings"],
-			"%#SpoonDiagnosticWarn# ",
-		})
+		warnings = table.concat({ "%#SpoonDiagnosticWarn#  ", count["warnings"], "%#SpoonDiagnosticWarn# " })
 	end
 	if count["hints"] ~= 0 then
-		hints = table.concat({
-			"%#SpoonDiagnosticHint#  ",
-			count["hints"],
-			"%#SpoonDiagnosticHint# ",
-		})
+		hints = table.concat({ "%#SpoonDiagnosticHint#  ", count["hints"], "%#SpoonDiagnosticHint# " })
 	end
 	if count["info"] ~= 0 then
-		info = table.concat({
-			"%#SpoonDiagnosticInfo#  ",
-			count["info"],
-			"%#SpoonDiagnosticInfo# ",
-		})
+		info = table.concat({ "%#SpoonDiagnosticInfo#  ", count["info"], "%#SpoonDiagnosticInfo# " })
 	end
 
 	return table.concat({
