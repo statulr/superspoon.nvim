@@ -6,10 +6,10 @@ M.mode = function()
 		["no"] = "NORMAL",
 		["v"] = "VISUAL",
 		["V"] = "VISUAL LINE",
-		[""] = "VISUAL BLOCK",
+		[""] = "VISUAL BLOCK", ---@diagnostic disable-line: duplicate-index
 		["s"] = "SELECT",
 		["S"] = "SELECT LINE",
-		[""] = "SELECT BLOCK",
+		[""] = "SELECT BLOCK", ---@diagnostic disable-line: duplicate-index
 		["i"] = "INSERT",
 		["ic"] = "INSERT",
 		["R"] = "REPLACE",
@@ -26,7 +26,7 @@ M.mode = function()
 
 	local current_mode = vim.api.nvim_get_mode().mode
 
-	return table.concat({ " %s ", modes[current_mode]}):upper()
+	return table.concat({ " %s ", modes[current_mode] }):upper()
 end
 
 M.file_info = function()
@@ -43,11 +43,39 @@ end
 
 M.lsp = function()
 	local set_hl = vim.api.nvim_set_hl
+	local synIDattr = vim.fn.synIDattr
+	local hlID = vim.fn.hlID
 
-	set_hl(0, "SpoonDiagnosticError", { fg = "#F94B4B", bg = "#282433", default = true })
-	set_hl(0, "SpoonDiagnosticWarn", { fg = "#CDE24E", bg = "#282433", default = true })
-	set_hl(0, "SpoonDiagnosticInfo", { fg = "#5CA2DF", bg = "#282433", default = true })
-	set_hl(0, "SpoonDiagnosticHint", { fg = "#60CCC9", bg = "#282433", default = true })
+	local hl_group = {
+		error = vim.api.nvim_get_hl_by_name("LspDiagnosticsError", true),
+		warn = vim.api.nvim_get_hl_by_name("LspDiagnosticsWarning", true),
+		info = vim.api.nvim_get_hl_by_name("LspDiagnosticsInformation", true),
+		hint = vim.api.nvim_get_hl_by_name("LspDiagnosticsHint", true)
+	}
+
+	local new_hl_group = {
+		error = {
+			fg = hl_group.error.foreground,
+			bg = synIDattr(hlID("Statusline"), "bg")
+		},
+		warn = {
+			fg = hl_group.warn.foreground,
+			bg = synIDattr(hlID("Statusline"), "bg")
+		},
+		info = {
+			fg = hl_group.info.foreground,
+			bg = synIDattr(hlID("Statusline"), "bg")
+		},
+		hint = {
+			fg = hl_group.hint.foreground,
+			bg = synIDattr(hlID("Statusline"), "bg")
+		},
+	}
+
+	set_hl(0, "SpoonDiagnosticError", new_hl_group.error)
+	set_hl(0, "SpoonDiagnosticWarn", new_hl_group.warn)
+	set_hl(0, "SpoonDiagnosticInfo", new_hl_group.info)
+	set_hl(0, "SpoonDiagnosticHint", new_hl_group.hint)
 
 	local count = {}
 	local dtype = {
