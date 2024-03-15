@@ -1,5 +1,5 @@
 # superspoon.nvim
-superspoon.nvim - a fast and extensible statusline
+superspoon.nvim - a minimal and fast statusline
 
 ## Installation
 ### [lazy.nvim](https://github.com/folke/lazy.nvim)
