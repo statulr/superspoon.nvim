@@ -107,13 +107,7 @@ M.lsp = function()
 		info = table.concat({ "%#SpoonDiagnosticInfo#  ", count["info"], "%#SpoonDiagnosticInfo# " })
 	end
 
-	return table.concat({
-		errors,
-		warnings,
-		hints,
-		info,
-		"%#Normal#",
-	})
+	return table.concat({ errors, warnings, hints, info, "%#Normal#" })
 end
 
 return M
