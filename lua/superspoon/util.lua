@@ -47,10 +47,10 @@ M.lsp = function()
 	local hlID = vim.fn.hlID
 
 	local hl_group = {
-		error = vim.api.nvim_get_hl_by_name("LspDiagnosticsError", true),
-		warn = vim.api.nvim_get_hl_by_name("LspDiagnosticsWarning", true),
-		info = vim.api.nvim_get_hl_by_name("LspDiagnosticsInformation", true),
-		hint = vim.api.nvim_get_hl_by_name("LspDiagnosticsHint", true)
+		error = vim.api.nvim_get_hl_by_name("DiagnosticsSignError", true),
+		warn = vim.api.nvim_get_hl_by_name("DiagnosticsSignWarn", true),
+		info = vim.api.nvim_get_hl_by_name("DiagnosticsSignInfo", true),
+		hint = vim.api.nvim_get_hl_by_name("DiagnosticsSignHint", true)
 	}
 
 	local new_hl_group = {
