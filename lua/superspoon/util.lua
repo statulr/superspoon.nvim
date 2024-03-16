@@ -46,36 +46,36 @@ M.lsp = function()
 	local synIDattr = vim.fn.synIDattr
 	local hlID = vim.fn.hlID
 
-	local hl_group = {
+	local hl_origin = {
 		error = vim.api.nvim_get_hl_by_name("DiagnosticSignError", true),
 		warn = vim.api.nvim_get_hl_by_name("DiagnosticSignWarn", true),
 		info = vim.api.nvim_get_hl_by_name("DiagnosticSignInfo", true),
 		hint = vim.api.nvim_get_hl_by_name("DiagnosticSignHint", true)
 	}
 
-	local new_hl_group = {
+	local hl_fetched = {
 		error = {
-			fg = hl_group.error.foreground,
+			fg = hl_origin.error.foreground,
 			bg = synIDattr(hlID("Statusline"), "bg")
 		},
 		warn = {
-			fg = hl_group.warn.foreground,
+			fg = hl_origin.warn.foreground,
 			bg = synIDattr(hlID("Statusline"), "bg")
 		},
 		info = {
-			fg = hl_group.info.foreground,
+			fg = hl_origin.info.foreground,
 			bg = synIDattr(hlID("Statusline"), "bg")
 		},
 		hint = {
-			fg = hl_group.hint.foreground,
+			fg = hl_origin.hint.foreground,
 			bg = synIDattr(hlID("Statusline"), "bg")
 		},
 	}
 
-	set_hl(0, "SpoonDiagnosticError", new_hl_group.error)
-	set_hl(0, "SpoonDiagnosticWarn", new_hl_group.warn)
-	set_hl(0, "SpoonDiagnosticInfo", new_hl_group.info)
-	set_hl(0, "SpoonDiagnosticHint", new_hl_group.hint)
+	set_hl(0, "SpoonDiagnosticError", hl_fetched.error)
+	set_hl(0, "SpoonDiagnosticWarn", hl_fetched.warn)
+	set_hl(0, "SpoonDiagnosticInfo", hl_fetched.info)
+	set_hl(0, "SpoonDiagnosticHint", hl_fetched.hint)
 
 	local count = {}
 	local dtype = {
