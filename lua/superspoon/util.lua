@@ -5,32 +5,29 @@ M.mode = function()
 		["n"] = "NORMAL",
 		["no"] = "NORMAL",
 		["v"] = "VISUAL",
-		["V"] = "VISUAL LINE",
-		[""] = "VISUAL BLOCK", ---@diagnostic disable-line: duplicate-index
+		["V"] = "V-LINE",
+		["\22"] = "V-BLOCK",
 		["s"] = "SELECT",
-		["S"] = "SELECT LINE",
-		[""] = "SELECT BLOCK", ---@diagnostic disable-line: duplicate-index
+		["S"] = "S-LINE",
+		["\19"] = "S-BLOCK",
 		["i"] = "INSERT",
 		["ic"] = "INSERT",
 		["R"] = "REPLACE",
-		["Rv"] = "VISUAL REPLACE",
+		["Rv"] = "V-REPLACE",
 		["c"] = "COMMAND",
-		["cv"] = "VIM EX",
-		["ce"] = "EX",
 		["r"] = "PROMPT",
 		["rm"] = "MOAR",
 		["r?"] = "CONFIRM",
-		["!"] = "SHELL",
 		["t"] = "TERMINAL",
 	}
 
 	local current_mode = vim.api.nvim_get_mode().mode
 
-	return table.concat({ " %s ", modes[current_mode] }):upper()
+	return table.concat({ "%s ", modes[current_mode] }):upper()
 end
 
 M.file_info = function()
-	return " %t "
+	return " %t %m%r "
 end
 
 M.line_info = function()
@@ -43,8 +40,7 @@ end
 
 M.lsp = function()
 	local set_hl = vim.api.nvim_set_hl
-	local synIDattr = vim.fn.synIDattr
-	local hlID = vim.fn.hlID
+	local hl_bg = vim.fn.synIDattr(vim.fn.hlID("Statusline"), "bg")
 
 	local hl_origin = {
 		error = vim.api.nvim_get_hl_by_name("DiagnosticSignError", true),
@@ -56,19 +52,19 @@ M.lsp = function()
 	local hl_fetched = {
 		error = {
 			fg = hl_origin.error.foreground,
-			bg = synIDattr(hlID("Statusline"), "bg")
+			bg = hl_bg
 		},
 		warn = {
 			fg = hl_origin.warn.foreground,
-			bg = synIDattr(hlID("Statusline"), "bg")
+			bg = hl_bg
 		},
 		info = {
 			fg = hl_origin.info.foreground,
-			bg = synIDattr(hlID("Statusline"), "bg")
+			bg = hl_bg
 		},
 		hint = {
 			fg = hl_origin.hint.foreground,
-			bg = synIDattr(hlID("Statusline"), "bg")
+			bg = hl_bg
 		},
 	}
 

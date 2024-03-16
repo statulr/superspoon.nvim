@@ -9,7 +9,6 @@ Statusline.active = function()
 		"%#Statusline#",
 		Util.mode(),
 		Util.file_info(),
-		"%m%r ",
 		Util.lsp(),
 		"%#Statusline#%=",
 		Util.line_info(),
