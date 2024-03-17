@@ -48,13 +48,11 @@ M.diagnostics = function()
 
 	if colors.cattpuccin[get_col] then
 		hl_bg.catppuccin = vim.fn.synIDattr(vim.fn.hlID("Pmenu"), "bg")
-	end
-
-	if colors.habamax[get_col] then
+	elseif colors.habamax[get_col] then
 		hl_bg.habamax = vim.fn.synIDattr(vim.fn.hlID("StatuslineNC"), "bg")
 	end
 
-	hl_bg = hl_bg.default or hl_bg.catppuccin or hl_bg.habamax
+	hl_bg = hl_bg.catppuccin or hl_bg.habamax or hl_bg.default
 
 	local hl_origin = {
 		error = vim.api.nvim_get_hl_by_name("DiagnosticSignError", true),
