@@ -16,14 +16,13 @@ M.mode = function()
 		["Rv"] = "V-REPLACE",
 		["c"] = "COMMAND",
 		["r"] = "PROMPT",
-		["rm"] = "MOAR",
 		["r?"] = "CONFIRM",
 		["t"] = "TERMINAL",
 	}
 
 	local current_mode = vim.api.nvim_get_mode().mode
 
-	return table.concat({ "%s ", modes[current_mode] }):upper()
+	return table.concat({ " [", "%s", modes[current_mode], "]" }):upper()
 end
 
 M.file_info = function()
@@ -40,32 +39,30 @@ end
 
 M.lsp = function()
 	local set_hl = vim.api.nvim_set_hl
-	local hl_bg = vim.fn.synIDattr(vim.fn.hlID("Statusline"), "bg")
+
+	local colorscheme_mappings = {
+		["catppuccin"] = true,
+		["catppuccin-frappe"] = true,
+		["catppuccin-latte"] = true,
+		["catppuccin-macchiato"] = true,
+		["catppuccin-mocha"] = true,
+	}
+
+	local hl_bg = colorscheme_mappings[vim.g.colors_name] and vim.fn.synIDattr(vim.fn.hlID("Pmenu"), "bg")
+		or vim.fn.synIDattr(vim.fn.hlID("ColorColumn"), "bg")
 
 	local hl_origin = {
 		error = vim.api.nvim_get_hl_by_name("DiagnosticSignError", true),
 		warn = vim.api.nvim_get_hl_by_name("DiagnosticSignWarn", true),
 		info = vim.api.nvim_get_hl_by_name("DiagnosticSignInfo", true),
-		hint = vim.api.nvim_get_hl_by_name("DiagnosticSignHint", true)
+		hint = vim.api.nvim_get_hl_by_name("DiagnosticSignHint", true),
 	}
 
 	local hl_fetched = {
-		error = {
-			fg = hl_origin.error.foreground,
-			bg = hl_bg
-		},
-		warn = {
-			fg = hl_origin.warn.foreground,
-			bg = hl_bg
-		},
-		info = {
-			fg = hl_origin.info.foreground,
-			bg = hl_bg
-		},
-		hint = {
-			fg = hl_origin.hint.foreground,
-			bg = hl_bg
-		},
+		error = { fg = hl_origin.error.foreground, bg = hl_bg, default = true },
+		warn = { fg = hl_origin.warn.foreground, bg = hl_bg, default = true },
+		info = { fg = hl_origin.info.foreground, bg = hl_bg, default = true },
+		hint = { fg = hl_origin.hint.foreground, bg = hl_bg, default = true },
 	}
 
 	set_hl(0, "SpoonDiagnosticError", hl_fetched.error)
