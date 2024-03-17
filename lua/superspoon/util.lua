@@ -37,19 +37,24 @@ M.line_info = function()
 	return " %l:%c [%P] "
 end
 
-M.lsp = function()
+M.diagnostics = function()
 	local set_hl = vim.api.nvim_set_hl
+	local hl_bg = {}
 
-	local colorscheme_mappings = {
-		["catppuccin"] = true,
-		["catppuccin-frappe"] = true,
-		["catppuccin-latte"] = true,
-		["catppuccin-macchiato"] = true,
-		["catppuccin-mocha"] = true,
-	}
+	local colors = require("superspoon.lib.diagnostics").colors
+	local get_col = vim.g.colors_name
 
-	local hl_bg = colorscheme_mappings[vim.g.colors_name] and vim.fn.synIDattr(vim.fn.hlID("Pmenu"), "bg")
-		or vim.fn.synIDattr(vim.fn.hlID("ColorColumn"), "bg")
+	hl_bg.default = vim.fn.synIDattr(vim.fn.hlID("ColorColumn"), "bg")
+
+	if colors.cattpuccin[get_col] then
+		hl_bg.catppuccin = vim.fn.synIDattr(vim.fn.hlID("Pmenu"), "bg")
+	end
+
+	if colors.habamax[get_col] then
+		hl_bg.habamax = vim.fn.synIDattr(vim.fn.hlID("StatuslineNC"), "bg")
+	end
+
+	hl_bg = hl_bg.default or hl_bg.catppuccin or hl_bg.habamax
 
 	local hl_origin = {
 		error = vim.api.nvim_get_hl_by_name("DiagnosticSignError", true),

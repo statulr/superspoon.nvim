@@ -9,7 +9,7 @@ Statusline.active = function()
 		"%#Statusline#",
 		Util.mode(),
 		Util.file_info(),
-		Util.lsp(),
+		Util.diagnostics(),
 		"%#Statusline#%=",
 		Util.line_info(),
 	})
