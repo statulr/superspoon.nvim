@@ -12,7 +12,8 @@ superspoon.nvim - a minimal and fast statusline
 }
 ```
 
-[packer](https://github.com/wbthomason/packer.nvim): <details><summary></summary>
+### [packer.nvim](https://github.com/wbthomason/packer.nvim)
+<details><summary></summary>
 
 ```lua
 return require('packer').startup(function(use)
@@ -26,7 +27,8 @@ require("superspoon").setup({
 
 </details>
 
-<details><summary>vim-plug</summary>
+### [vim-plug](https://github.com/junegunn/vim-plug)
+<details><summary></summary>
  
 ```vim
 call plug#begin()
