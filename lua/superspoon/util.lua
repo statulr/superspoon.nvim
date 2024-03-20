@@ -22,11 +22,19 @@ M.mode = function()
 
 	local current_mode = vim.api.nvim_get_mode().mode
 
-	return table.concat({ " [", "%s", modes[current_mode], "]" }):upper()
+	return table.concat({ " [", "%s", modes[current_mode], "] " }):upper()
+end
+
+M.filetype = function()
+	if vim.bo.filetype ~= "" then
+		return vim.bo.filetype .. " "
+	else
+		return "unknown"
+	end
 end
 
 M.file_info = function()
-	return " %t %m%r "
+	return "%t %m%r "
 end
 
 M.line_info = function()
@@ -34,7 +42,7 @@ M.line_info = function()
 		return ""
 	end
 
-	return " %l:%c [%P] "
+	return " %l/%L:%c [%P] "
 end
 
 M.diagnostics = function()
