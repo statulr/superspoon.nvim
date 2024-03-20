@@ -11,10 +11,10 @@ superspoon.nvim - a minimal and fast statusline
     }
 }
 ```
-### [packer.nvim](https://github.com/wbthomason/packer.nvim)
-```lua
-vim.cmd [[packadd packer.nvim]]
 
+<details><summary>packer</summary>
+
+```lua
 return require('packer').startup(function(use)
     use 'qtkittyy/superspoon.nvim'
 end)
@@ -23,7 +23,11 @@ require("superspoon").setup({
     -- Place your configuration below
 })
 ```
-### [vim-plug](https://github.com/junegunn/vim-plug)
+
+</details>
+
+<details><summary>vim-plug</summary>
+ 
 ```vim
 call plug#begin()
     Plug 'qtkittyy/superspoon.nvim'
@@ -35,6 +39,8 @@ require("superspoon").setup({
 })
 EOF
 ```
+
+</details>
 
 ### Configuration
 Superspoon comes with the following defaults:
