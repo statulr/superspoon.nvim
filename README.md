@@ -12,7 +12,8 @@ superspoon.nvim - a minimal and fast statusline
 }
 ```
 
-<details><summary>[packer](https://github.com/wbthomason/packer.nvim)</summary>
+[packer](https://github.com/wbthomason/packer.nvim)
+<details><summary></summary>
 
 ```lua
 return require('packer').startup(function(use)
