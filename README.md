@@ -29,10 +29,16 @@ require("superspoon").setup({
 })
 ```
 
-The can similarly be achieved through a `.vim` file by wrapping it in lua heredoc like this:
+This can similarly be achieved through a `.vim` file by wrapping it in lua heredoc like this:
 ```vim
 lua << EOF
-require("superspoon").setup()
+require("superspoon").setup({
+	mode = true,
+	file_info = true,
+	filetype = false,
+	diagnostics = true,
+	line_info = true,
+})
 EOF
 ```
 
