@@ -5,36 +5,36 @@ local Util = require("superspoon.util")
 Statusline = {}
 
 Statusline.active = function()
-  local parts = { "%#Statusline#" }
+	local parts = { "%#Statusline#" }
 
-  local opts = {
-    { "spoon_mode", Util.mode() },
-    { "spoon_file_info", Util.file_info() },
-    { "spoon_ft", Util.filetype() },
-    { "spoon_diagnostics", Util.diagnostics() },
-    { "spoon_line_info", Util.line_info() }
-  }
+	local opts = {
+		{ "spoon_mode", Util.mode() },
+		{ "spoon_file_info", Util.file_info() },
+		{ "spoon_filetype", Util.filetype() },
+		{ "spoon_diagnostics", Util.diagnostics() },
+		{ "spoon_line_info", Util.line_info() },
+	}
 
-  local right = {}
+	local right = {}
 
-  for _, opt in ipairs(opts) do
-    if vim.api.nvim_get_var(opt[1]) == true then
-      if opt[1] == "spoon_line_info" then
-        table.insert(right, opt[2])
-      else
-        table.insert(parts, opt[2])
-      end
-    end
-  end
+	for _, opt in ipairs(opts) do
+		if vim.api.nvim_get_var(opt[1]) == true then
+			if opt[1] == "spoon_line_info" then
+				table.insert(right, opt[2])
+			else
+				table.insert(parts, opt[2])
+			end
+		end
+	end
 
-  table.insert(parts, "%#Statusline#%=")
+	table.insert(parts, "%#Statusline#%=")
 
-  -- Concatenate the right_parts to the end of parts
-  for _, part in ipairs(right) do
-    table.insert(parts, part)
-  end
+	-- Concatenate the right_parts to the end of parts
+	for _, part in ipairs(right) do
+		table.insert(parts, part)
+	end
 
-  return table.concat(parts)
+	return table.concat(parts)
 end
 
 Statusline.inactive = function()
@@ -48,7 +48,7 @@ M.setup = function(opts)
 
 	vim.api.nvim_set_var("spoon_mode", merged_opts.mode)
 	vim.api.nvim_set_var("spoon_file_info", merged_opts.file_info)
-	vim.api.nvim_set_var("spoon_ft", merged_opts.ft)
+	vim.api.nvim_set_var("spoon_ft", merged_opts.filetype)
 	vim.api.nvim_set_var("spoon_diagnostics", merged_opts.diagnostics)
 	vim.api.nvim_set_var("spoon_line_info", merged_opts.line_info)
 

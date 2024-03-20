@@ -1,7 +1,7 @@
 return {
 	mode = true,
 	file_info = true,
-	ft = true,
+	filetype = false,
 	diagnostics = true,
 	line_info = true,
 }
