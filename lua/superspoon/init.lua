@@ -48,7 +48,7 @@ M.setup = function(opts)
 
 	vim.api.nvim_set_var("spoon_mode", merged_opts.mode)
 	vim.api.nvim_set_var("spoon_file_info", merged_opts.file_info)
-	vim.api.nvim_set_var("spoon_ft", merged_opts.filetype)
+	vim.api.nvim_set_var("spoon_filetype", merged_opts.filetype)
 	vim.api.nvim_set_var("spoon_diagnostics", merged_opts.diagnostics)
 	vim.api.nvim_set_var("spoon_line_info", merged_opts.line_info)
 
