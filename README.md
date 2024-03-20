@@ -27,7 +27,7 @@ require("superspoon").setup({
 ### [vim-plug](https://github.com/junegunn/vim-plug)
 ```vim
 call plug#begin()
-Plug 'qtkittyy/superspoon.nvim'
+  Plug 'qtkittyy/superspoon.nvim'
 call plug#end()
 
 lua << EOF
