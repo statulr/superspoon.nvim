@@ -7,7 +7,7 @@ Statusline = {}
 Statusline.active = function()
   local parts = { "%#Statusline#" }
 
-  local options = {
+  local opts = {
     { "spoon_mode", Util.mode() },
     { "spoon_file_info", Util.file_info() },
     { "spoon_ft", Util.filetype() },
@@ -15,13 +15,24 @@ Statusline.active = function()
     { "spoon_line_info", Util.line_info() }
   }
 
-  for _, option in ipairs(options) do
-    if vim.api.nvim_get_var(option[1]) == true then
-      table.insert(parts, option[2])
+  local right = {}
+
+  for _, opt in ipairs(opts) do
+    if vim.api.nvim_get_var(opt[1]) == true then
+      if opt[1] == "spoon_line_info" then
+        table.insert(right, opt[2])
+      else
+        table.insert(parts, opt[2])
+      end
     end
   end
 
   table.insert(parts, "%#Statusline#%=")
+
+  -- Concatenate the right_parts to the end of parts
+  for _, part in ipairs(right) do
+    table.insert(parts, part)
+  end
 
   return table.concat(parts)
 end
