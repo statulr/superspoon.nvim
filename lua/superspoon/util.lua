@@ -22,15 +22,11 @@ M.mode = function()
 
 	local current_mode = vim.api.nvim_get_mode().mode
 
-	return table.concat({ " [", "%s", modes[current_mode], "] " }):upper()
+	return table.concat({ " [", modes[current_mode], "] " }):upper()
 end
 
 M.filetype = function()
-	if vim.bo.filetype ~= "" then
-		return vim.bo.filetype .. " "
-	else
-		return "unknown"
-	end
+	return vim.bo.filetype ~= "" and vim.bo.filetype or "unknown"
 end
 
 M.file_info = function()
@@ -38,11 +34,7 @@ M.file_info = function()
 end
 
 M.line_info = function()
-	if vim.bo.filetype == "alpha" then
-		return ""
-	end
-
-	return " %l/%L:%c [%P] "
+	return vim.bo.filetype == "alpha" and "" or " %l/%L:%c [%P] "
 end
 
 M.diagnostics = function()
@@ -93,25 +85,25 @@ M.diagnostics = function()
 		count[k] = vim.tbl_count(vim.diagnostic.get(0, { severity = level }))
 	end
 
-	local errors = ""
-	local warnings = ""
-	local hints = ""
-	local info = ""
+	local diagnostics = {
+		errors = count["errors"] ~= 0
+				and table.concat({ "%#SpoonDiagnosticError#  ", count["errors"], "%#SpoonDiagnosticError# " })
+			or "",
 
-	if count["errors"] ~= 0 then
-		errors = table.concat({ "%#SpoonDiagnosticError#  ", count["errors"], "%#SpoonDiagnosticError# " })
-	end
-	if count["warnings"] ~= 0 then
-		warnings = table.concat({ "%#SpoonDiagnosticWarn#  ", count["warnings"], "%#SpoonDiagnosticWarn# " })
-	end
-	if count["hints"] ~= 0 then
-		hints = table.concat({ "%#SpoonDiagnosticHint#  ", count["hints"], "%#SpoonDiagnosticHint# " })
-	end
-	if count["info"] ~= 0 then
-		info = table.concat({ "%#SpoonDiagnosticInfo#  ", count["info"], "%#SpoonDiagnosticInfo# " })
-	end
+		warnings = count["warnings"] ~= 0
+				and table.concat({ "%#SpoonDiagnosticWarn#  ", count["warnings"], "%#SpoonDiagnosticWarn# " })
+			or "",
 
-	return table.concat({ errors, warnings, hints, info, "%#Normal#" })
+		hints = count["hints"] ~= 0
+				and table.concat({ "%#SpoonDiagnosticHint#  ", count["hints"], "%#SpoonDiagnosticHint# " })
+			or "",
+
+		info = count["info"] ~= 0
+				and table.concat({ "%#SpoonDiagnosticInfo#  ", count["info"], "%#SpoonDiagnosticInfo# " })
+			or "",
+	}
+
+	return table.concat({ diagnostics.errors, diagnostics.warnings, diagnostics.hints, diagnostics.info, "%#Normal#" })
 end
 
 return M
