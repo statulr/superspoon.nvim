@@ -88,19 +88,19 @@ M.diagnostics = function()
 	local diagnostics = {
 		errors = count["errors"] ~= 0
 				and table.concat({ "%#SpoonDiagnosticError#  ", count["errors"], "%#SpoonDiagnosticError# " })
-				or "",
+			or "",
 
 		warnings = count["warnings"] ~= 0
 				and table.concat({ "%#SpoonDiagnosticWarn#  ", count["warnings"], "%#SpoonDiagnosticWarn# " })
-				or "",
+			or "",
 
 		hints = count["hints"] ~= 0
 				and table.concat({ "%#SpoonDiagnosticHint#  ", count["hints"], "%#SpoonDiagnosticHint# " })
-				or "",
+			or "",
 
 		info = count["info"] ~= 0
 				and table.concat({ "%#SpoonDiagnosticInfo#  ", count["info"], "%#SpoonDiagnosticInfo# " })
-				or "",
+			or "",
 	}
 
 	return table.concat({ diagnostics.errors, diagnostics.warnings, diagnostics.hints, diagnostics.info, "%#Normal#" })
