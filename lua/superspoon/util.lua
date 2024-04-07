@@ -41,18 +41,18 @@ M.diagnostics = function()
 	local set_hl = vim.api.nvim_set_hl
 	local hl_bg = {}
 
-	local colors = require("superspoon.lib.diagnostics").colors
-	local get_col = vim.g.colors_name
-
-	hl_bg.default = vim.fn.synIDattr(vim.fn.hlID("ColorColumn"), "bg")
-
-	if colors.cattpuccin[get_col] then
-		hl_bg.catppuccin = vim.fn.synIDattr(vim.fn.hlID("Pmenu"), "bg")
-	elseif colors.habamax[get_col] then
-		hl_bg.habamax = vim.fn.synIDattr(vim.fn.hlID("StatuslineNC"), "bg")
-	end
-
-	hl_bg = hl_bg.catppuccin or hl_bg.habamax or hl_bg.default
+	-- local colors = require("superspoon.lib.diagnostics").colors
+	-- local get_col = vim.g.colors_name
+	--
+	-- hl_bg.default = vim.fn.synIDattr(vim.fn.hlID("Statusline"), "bg")
+	--
+	-- if colors.cattpuccin[get_col] then
+	-- 	hl_bg.catppuccin = vim.fn.synIDattr(vim.fn.hlID("Pmenu"), "bg")
+	-- elseif colors.habamax[get_col] then
+	-- 	hl_bg.habamax = vim.fn.synIDattr(vim.fn.hlID("StatuslineNC"), "bg")
+	-- end
+	--
+	-- hl_bg = hl_bg.catppuccin or hl_bg.habamax or hl_bg.default
 
 	local hl_origin = {
 		error = vim.api.nvim_get_hl_by_name("DiagnosticSignError", true),
@@ -62,10 +62,10 @@ M.diagnostics = function()
 	}
 
 	local hl_fetched = {
-		error = { fg = hl_origin.error.foreground, bg = hl_bg, default = true },
-		warn = { fg = hl_origin.warn.foreground, bg = hl_bg, default = true },
-		info = { fg = hl_origin.info.foreground, bg = hl_bg, default = true },
-		hint = { fg = hl_origin.hint.foreground, bg = hl_bg, default = true },
+		error = { fg = hl_origin.error.foreground, bg = nil, default = true },
+		warn = { fg = hl_origin.warn.foreground,   bg = nil, default = true },
+		info = { fg = hl_origin.info.foreground,   bg = nil, default = true },
+		hint = { fg = hl_origin.hint.foreground,   bg = nil, default = true },
 	}
 
 	set_hl(0, "SpoonDiagnosticError", hl_fetched.error)
