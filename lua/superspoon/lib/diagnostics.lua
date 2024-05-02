@@ -11,6 +11,10 @@ M.colors = {
 
 	habamax = {
 		["habamax"] = true
+	},
+
+	wal = {
+		["wal"] = true
 	}
 }
 

@@ -1,6 +1,5 @@
 # superspoon.nvim
 superspoon.nvim - a minimal and fast statusline
-
 ## Installation
 ### [lazy.nvim](https://github.com/folke/lazy.nvim)
 ```lua
@@ -11,7 +10,6 @@ superspoon.nvim - a minimal and fast statusline
   }
 }
 ```
-
 ### [packer.nvim](https://github.com/wbthomason/packer.nvim)
 
 ```lua
@@ -23,7 +21,6 @@ require("superspoon").setup({
   -- Place your configuration below
 })
 ```
-
 ### [vim-plug](https://github.com/junegunn/vim-plug)
 ```vim
 call plug#begin()
@@ -36,7 +33,7 @@ require("superspoon").setup({
 })
 EOF
 ```
-
+For more information about wrapping Lua into vimscript, check out [`:help lua-heredoc`](https://neovim.io/doc/user/lua.html#%3Alua-heredoc).
 ### Configuration
 Superspoon comes with the following defaults:
 ```lua
@@ -49,4 +46,3 @@ Superspoon comes with the following defaults:
 }
 ```
 
-For more information, check out [`:help lua-heredoc`](https://neovim.io/doc/user/lua.html#%3Alua-heredoc).
